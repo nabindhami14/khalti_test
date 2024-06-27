@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const axios = require("axios");
 
@@ -5,7 +6,7 @@ const options = {
   method: "POST",
   url: "https://a.khalti.com/api/v2/epayment/initiate/",
   headers: {
-    Authorization: "key 485454545",
+    Authorization: `key ${process.env.KHALTI_SECRET_KEY}`,
     "Content-Type": "application/json",
   },
   data: JSON.stringify({
@@ -42,4 +43,4 @@ app.get("/success", async (req, res) => {
   return res.json({ message: "Transaction Success!!" });
 });
 
-app.listen(8080, () => console.log(`http://localhost:8080`));
+app.listen(8080, () => console.log(`http://localhost:8080/payment`));
